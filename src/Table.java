@@ -12,9 +12,33 @@ public class Table {
     private ArrayList<Card> discardPile = new ArrayList<>();
     private ArrayList<String> progressTokensNameList = new ArrayList<>(Arrays.asList("Urbanisme", "Artisanat", "Joaillerie", "Science", "Propagande", "Architecture", "Economie", "Ingénierie", "Tactique", "Décoration", "Politique", "Stratégie", "Education", "Culture"));
 
-    public Table(int numberOfPlayers) {
-        for (int i = 0; i < 20; i++) {
-            this.cardPile.add(new Card());
+    public Table(int numberOfPlayers, Game game) {
+        for (int i = 0; i < 200 - 20 * numberOfPlayers; i++) {
+            String color = new ArrayList<>(Arrays.asList("Rouge", "Gris", "Jaune", "Bleu", "Vert")).get(i%((200 - 20 * numberOfPlayers)/5));
+
+            switch (color) {
+                case "Gris" -> {
+                    String resource = game.getGreyCardsResourcesList().get(new Random().nextInt(game.getGreyCardsResourcesList().size()));
+                    game.getGreyCardsResourcesList().remove(resource);
+                    this.cardPile.add(new Card(false, color, resource));
+                }
+
+                case "Rouge" -> {
+                    this.cardPile.add(new Card(false, color, new ArrayList<>(Arrays.asList("Zero", "Une", "Deux")).get(new Random().nextInt(3))));
+                }
+
+                case "Jaune" -> {
+                    this.cardPile.add(new Card(false, color, "Pièce"));
+                }
+
+                case "Bleu" -> {
+                    this.cardPile.add(new Card(false, color, new ArrayList<>(Arrays.asList("Chat", "Normal")).get(new Random().nextInt(2))));
+                }
+
+                case "Vert" -> {
+                    this.cardPile.add(new Card(false, color, new ArrayList<>(Arrays.asList("Sculpture", "Architecture", "Physique")).get(new Random().nextInt(3))));
+                }
+            }
         }
 
         for (int i = 0; i < 12; i++) {
@@ -76,5 +100,13 @@ public class Table {
 
     public ArrayList<Card> getDiscardPile() {
         return this.discardPile;
+    }
+
+    public void discard(Card card) {
+        this.getDiscardPile().add(card);
+    }
+
+    public void setCatToken(boolean catToken) {
+        this.catToken = catToken;
     }
 }
