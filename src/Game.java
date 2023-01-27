@@ -30,6 +30,10 @@ public class Game {
         return this.players;
     }
 
+    public Table getTable() {
+        return this.table;
+    }
+
     public boolean isOver() {
         boolean result = false;
         for (Player player : this.players) {

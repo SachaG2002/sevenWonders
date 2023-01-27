@@ -45,7 +45,7 @@ public class Player {
 
     public void makeAMove(Table table, Game game, String move) {
         Card card = null;
-        if (move.equals("table")) {
+        if (move.equals("Table")) {
             card = table.getCardPile().get(0);
             this.hand.add(card);
             table.discard(card);
@@ -69,7 +69,27 @@ public class Player {
             this.hand.add(card);
             table.discard(card);
             table.getCardPile().remove(0);
+            if (card.getName().equals("Une")) {
+                for (ConflictToken token : table.getConflictTokens()) {
+                    if (token.getVisibleFace().equals("Paix")) {
+                        token.turnToken("Guerre");
+                        break;
+                    }
+                }
+            } else if (card.getName().equals("Deux")) {
+                int j = 0;
+                for (ConflictToken token : table.getConflictTokens()) {
+                    if (token.getVisibleFace().equals("Paix")) {
+                        token.turnToken("Guerre");
+                        j += 1;
+                        if (j == 2) {
+                            break;
+                        }
+                    }
+                }
+            }
         }
+        System.out.println("Carte piochée : " + card.getColor() + "(" + card.getName() + ")");
     }
 
     public int getVictoryPoints() {

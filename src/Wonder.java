@@ -43,4 +43,8 @@ public class Wonder {
         }
         return result;
     }
+
+    public String getName() {
+        return this.name;
+    }
 }
