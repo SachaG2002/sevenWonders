@@ -10,11 +10,11 @@ public class Table {
     private int militaryVictoryTokens;
     private ArrayList<ConflictToken> conflictTokens = new ArrayList<>();
     private ArrayList<Card> discardPile = new ArrayList<>();
-    private ArrayList<String> progressTokensNameList = new ArrayList<>(Arrays.asList("Urbanisme", "Artisanat", "Joaillerie", "Science", "Propagande", "Architecture", "Economie", "Ingénierie", "Tactique", "Décoration", "Politique", "Stratégie", "Education", "Culture"));
+    private ArrayList<String> progressTokensNameList = new ArrayList<>(Arrays.asList("Urbanisme", "Artisanat", "Joaillerie", "Science", "Propagande", "Architecture", "Economie", "Ingénierie", "Tactique", "Décoration", "Politique", "Stratégie", "Education", "Culture", "Culture"));
 
     public Table(int numberOfPlayers, Game game) {
         for (int i = 0; i < 200 - 20 * numberOfPlayers; i++) {
-            String color = new ArrayList<>(Arrays.asList("Rouge", "Gris", "Jaune", "Bleu", "Vert")).get(i%((200 - 20 * numberOfPlayers)/5));
+            String color = new ArrayList<>(Arrays.asList("Rouge", "Gris", "Jaune", "Bleu", "Vert")).get(i/((200 - 20 * numberOfPlayers)/5));
 
             switch (color) {
                 case "Gris" -> {

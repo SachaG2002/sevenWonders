@@ -61,6 +61,14 @@ public class Player {
             }
         } else if (card.getColor().equals("Bleu")) {
             this.victoryPoints += 1;
+        } else if (card.getColor().equals("Vert")) {
+            this.hand.add(card);
+            table.discard(card);
+            table.getCardPile().remove(0);
+        } else if (card.getColor().equals("Rouge")) {
+            this.hand.add(card);
+            table.discard(card);
+            table.getCardPile().remove(0);
         }
     }
 
@@ -107,5 +115,9 @@ public class Player {
             player.setCatToken(false);
         }
         this.catToken = true;
+    }
+
+    public String getName() {
+        return this.name;
     }
 }
